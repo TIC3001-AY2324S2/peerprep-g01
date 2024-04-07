@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  question-service:
+    build:
+      context: ./question-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    container_name: question-service
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    container_name: user-service
