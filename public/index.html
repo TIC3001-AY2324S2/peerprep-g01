@@ -13,6 +13,9 @@
 
     <title>TIC3001 SPA</title>
     <style>
+        .logout{
+            float: right;
+        }
         .hidden {
             display: none;
         }
@@ -74,7 +77,7 @@
             color: #fff;
             cursor: pointer;
         }
-
+        
     </style>
     
 </head>
@@ -138,9 +141,30 @@
                 </form>
             </div>
         </div>
+
         <div class="tab-pane fade m-5" id="my-Pane" role="tabpanel" aria-labelledby="my-tab">
-            <h2>WORK IN PROGRESS</h2>
+            <!-- <h2>WORK IN PROGRESS</h2> -->
+            <div>
+                <button id="logout" class="btn btn-primary logout">Logout</button>
+            </div>
+            <form id="user-profile-form" class="user-profile-form" >
+                <p id="user-Profile"></p>
+                <div class="mb-3">
+                    <label for="userName" class="form-label">User Name: </label>
+                    <input type="text" class="form-control" id="userName" />
+                </div>
+                <div class="mb-3">
+                    <label for="createAt" class="form-label">Created At: </label>
+                    <textarea type="text" class="form-control" id="createAt"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="myMatch" class="form-label">My Questions & Matches: {to be work on}</label>
+                    <!-- <input type="text" class="form-control" id="myMatch" /> -->
+                </div>
+                <button id='deleteAccount' type="Delete" class="btn btn-danger">Delete account</button>
+            </form>
         </div>
+
         <div class="tab-pane fade m-5" id="listView" role="tabpanel" aria-labelledby="listView-tab">
             <div class="row">
                 <div class="col">               
