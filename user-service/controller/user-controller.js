@@ -74,6 +74,7 @@ export async function deleteUser(req, res) {
 }
 
 export async function getUserByEmail(req, res) {
+  console.log('req', req.body);
   try {
     const { email } = req.body;
     if (email) {

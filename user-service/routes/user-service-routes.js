@@ -16,7 +16,7 @@ router.patch("/update-privilege", verifyAccessToken, verifyIsAdmin, updateUserPr
 
 router.get("/all", verifyAccessToken, verifyIsAdmin, getAllUsers);
 
-router.get("/", verifyAccessToken, verifyEmail, getUserByEmail);
+router.post("/getUserByEmail", verifyAccessToken, verifyEmail, getUserByEmail);
 
 router.post("/", createUser);
 
