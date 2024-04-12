@@ -96,8 +96,14 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
   await connection.close();
 
   // Send a response back to the client to indicate the message was sent
-  res.send("Message sent to RabbitMQ");
-  startConsumer();
+  if(userMatch){
+    res.json({ message: "Match Found!!", userData2 });
+  } 
+  else{
+
+  startConsumer(res);
+  }
+  
   }
 
 );
@@ -163,7 +169,7 @@ function startCheck() {
   }
 
 // to recieve ************************************
-function startConsumer() {
+function startConsumer(res) {
 (async () => {
   // Create a connection to the local RabbitMQ server
   const connection = await amqp.connect("amqp://localhost");
@@ -202,6 +208,10 @@ function startConsumer() {
 
         // Acknowledge the message so RabbitMQ knows it has been processed
         channel.ack(message);
+
+        if(userMatch){
+          res.json({ message: "Match Found-2!!", userData2 });
+        }
 
       } else {
         //console.log("no ack given");
