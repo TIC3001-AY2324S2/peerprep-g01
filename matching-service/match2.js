@@ -1,3 +1,14 @@
+
+
+
+/*
+This .js file is for testing purpose. Running on the same logic and functions used by match.js
+*/
+
+
+
+
+
 // Import the express package to create and configure the server
 const express = require("express");
 
@@ -8,7 +19,7 @@ const amqp = require("amqplib");
 // Initialize the express application
 const app = express();
 
-const compare = require("./compare.js")
+const compare = require("./Utils/compare.js")
 
 // Import the cors middleware to enable CORS on the server
 const cors = require("cors");
@@ -38,8 +49,18 @@ const userData2 ={
 // to check if user has found match
 let userMatch = false;
 
+/*function compareUserData(userData1, userData2) {
+  // Compare each property value
+  if (userData1.difficulty !== userData2.difficulty) return false;
+  if (userData1.topic !== userData2.topic) return false;
+
+  // If all values are equal, return true
+  return true;
+}*/
+
 let extChk = false;
 
+//extChk = startCheck();
 startCheck();
 
 // Define a GET route "/send" that will be used to send messages to RabbitMQ
@@ -147,7 +168,7 @@ function startCheck() {
   
     console.log("Consumer waiting for messages...");
   
-    // Stop consuming messages after 1 seconds
+    // Stop consuming messages after 20 seconds
     setTimeout(() => {
       if (consumer) {
         channel.cancel(consumer.consumerTag);
@@ -219,11 +240,11 @@ function startConsumer(res) {
 
   console.log("Consumer waiting for messages...");
 
-  // Stop consuming messages after 25 seconds
+  // Stop consuming messages after 20 seconds
   setTimeout(() => {
     if (consumer) {
       channel.cancel(consumer.consumerTag);
-      console.log("Consumer stopped after 25 seconds.");
+      console.log("Consumer stopped after 20 seconds.");
     }
   }, 25000);
 
