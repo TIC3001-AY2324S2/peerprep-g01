@@ -13,6 +13,9 @@ const listViewPane = document.getElementById('listView');
 const detailViewTab = document.getElementById('detailView-tab');
 const detailViewPane = document.getElementById('detailView');
 
+const matchingTab = document.getElementById('matching-tab');
+const matchingPane = document.getElementById('matchingModal');
+
 // Tab effects on click
 userLoginTab.addEventListener('click', function() {
     // userLoginTab_Remove();
@@ -20,6 +23,7 @@ userLoginTab.addEventListener('click', function() {
     myTab_Remove();
     listViewTab_Remove();
     detailViewTab_Remove();
+    matchingTab_Remove()
     
     userLoginTab.classList.add('active');
     userLoginPane.classList.add("show", "active");           
@@ -33,6 +37,7 @@ newUserTab.addEventListener('click', function() {
     myTab_Remove();
     listViewTab_Remove();
     detailViewTab_Remove();
+    matchingTab_Remove()
     
     newUserTab.classList.add('active');
     newUserPane.classList.add("show","active");
@@ -47,6 +52,7 @@ myTab.addEventListener('click', function() {
     // myTab_Remove();
     listViewTab_Remove();
     detailViewTab_Remove();
+    matchingTab_Remove()
     
     myTab.classList.add('active');
     myTabPane.classList.add("show","active");
@@ -59,6 +65,7 @@ listViewTab.addEventListener('click', function() {
     myTab_Remove();
     // listViewTab_Remove();
     detailViewTab_Remove();
+    matchingTab_Remove()
 
     listViewTab.classList.add('active');
     listViewPane.classList.add("show","active");
@@ -70,11 +77,23 @@ detailViewTab.addEventListener('click', function() {
     myTab_Remove();
     listViewTab_Remove();
     // detailViewTab_Remove();
+    matchingTab_Remove()
 
     detailViewTab.classList.add('active');
     detailViewPane.classList.add("show","active");
 });
 
+matchingTab.addEventListener('click', function() {
+    userLoginTab_Remove();
+    newUserTab_Remove();
+    myTab_Remove();
+    listViewTab_Remove();
+    detailViewTab_Remove();
+    // matchingTab_Remove()
+
+    matchingTab.classList.add('active');
+    matchingPane.classList.add("show","active");
+});
 
 // Supporting functions for tab effects
 function userLoginTab_Remove(){
@@ -122,6 +141,14 @@ function detailViewTab_Remove(){
     }
 }
 
+function matchingTab_Remove(){
+    if (matchingTab.classList.contains('active')){
+        matchingTab.classList.remove('active');
+    }
+    if (matchingPane.classList.contains('active')){
+        matchingPane.classList.remove('active','show');
+    }
+}
 
 // Event functions used in other .js files
 function switchToLogin() {
@@ -140,6 +167,10 @@ function switchToAddQuestions() {
     detailViewTab.dispatchEvent(new Event('click'));
 }
 
+function switchToMatching() {
+    matchingTab.dispatchEvent(new Event('click'));
+}
+
 function displayUponLogin(){   
     userLoginTab.classList.add('disabled');
     userLoginTab.classList.remove('active');  
@@ -148,6 +179,7 @@ function displayUponLogin(){
     myTab.classList.add('active');
     listViewTab.classList.remove('disabled');
     detailViewTab.classList.remove('disabled');
+    matchingTab.classList.remove('disabled');
 
     userLoginPane.classList.remove("show", "active");
     myTabPane.classList.add("show","active")

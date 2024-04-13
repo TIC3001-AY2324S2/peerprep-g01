@@ -110,7 +110,6 @@
         animation: pulse 1s infinite; /* Add animation for feedback */
         text-align: center;
     }
-    }
     @keyframes pulse {
         0% {
             opacity: 0.5;
@@ -159,7 +158,7 @@
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link disabled" id="matching-tab" data-bs-toggle="modal" data-bs-target="#matchingModal"
+                    <a class="nav-link disabled" id="matching-tab" data-bs-toggle="tab" data-bs-target="#matchingModal"
                        type="button" role="tab" aria-controls="matchingModal" aria-selected="true">Start Matching
                     </a>
                 </li>
@@ -167,58 +166,6 @@
         </div>
     </div>
 </nav>
-
-
-<!-- Matching Modal -->
-<div class="modal fade" id="matchingModal"  aria-labelledby="matchingModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="matchingModalLabel">Select Matching Particulars</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="matchingForm">
-                    <div class="mb-3">
-                        <label for="selectComplexity" class="form-label">Select Complexity</label>
-                        <select id="selectDifficulty" class="form-select" aria-label="Select Complexity" style="width: 400px;">
-                            <option value="Easy" selected>Easy</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Hard">Hard</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="selectTopic" class="form-label">Select Topic</label>
-                        <select id="selectTopic" class="form-select" aria-label="Select Topic" style="width: 400px;">
-                            <option value="Strings" selected>Strings</option>
-                            <option value="Algorithms" selected>Algorithms</option>
-                            <option value="Data Structures" selected>Data Structures</option>
-                            <option value="Bit Manipulation" selected>Bit Manipulation</option>
-                            <option value="Brainteaser" selected>Brainteaser</option>
-                            <option value="Databases" selected>Databases</option>
-                        </select>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="switchToLogin()" class="btn btn-secondary">Back</button>
-                <button id="start-Matching" class="btn btn-primary" >Start Matching</button>
-            </div>
-            <!-- Timer -->
-            <div id="timer">
-                <p id="clock">00:30</p>
-            </div>
-
-            <!-- Feedback -->
-            <div id="feedback" style="display: none;">Please wait while we find a match...</div>
-
-        </div>
-    </div>
-</div>
-</div>
 
 
 <div class="tab-content" id="myTabContent">
@@ -362,6 +309,58 @@
             <button type="reset" onclick="handleClear()" class="btn">Reset</button>
         </form>
     </div>
+
+    <div class="tab-pane fade m-5" id="matchingModal" role="tabpanel" aria-labelledby="matchingModal">
+        <div class="modal-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="matchingModalLabel">Select Matching Particulars</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="matchingForm">
+                        <div class="mb-3">
+                            <label for="selectComplexity" class="form-label">Select Complexity</label>
+                            <select id="selectDifficulty" class="form-select" aria-label="Select Complexity" style="width: 400px;">
+                                <option value="Easy" selected>Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="selectTopic" class="form-label">Select Topic</label>
+                            <select id="selectTopic" class="form-select" aria-label="Select Topic" style="width: 400px;">
+                                <option value="Strings" selected>Strings</option>
+                                <option value="Algorithms" selected>Algorithms</option>
+                                <option value="Data Structures" selected>Data Structures</option>
+                                <option value="Bit Manipulation" selected>Bit Manipulation</option>
+                                <option value="Brainteaser" selected>Brainteaser</option>
+                                <option value="Databases" selected>Databases</option>
+                            </select>
+                        </div>
+    
+                    </form>
+                </div>
+                <div class="modal-body">
+                    <button type="button" onclick="switchToLogin()" class="btn btn-secondary">Back</button>
+                    <button id="start-Matching" class="btn btn-primary" >Start Matching</button>
+                </div>
+                <!-- Timer -->
+                <div id="timer">
+                    <p id="clock">00:30</p>
+                </div>
+    
+                <!-- Feedback -->
+                <div id="feedback" style="display: none;">Please wait while we find a match...</div>
+    
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <script src="https://use.fontawesome.com/c0bffde2b7.js"></script>
