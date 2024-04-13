@@ -4,12 +4,20 @@
 
 <head>
     <!-- Required meta tags -->
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 
     <title>TIC3001 SPA</title>
     <style>
@@ -44,7 +52,7 @@
         textarea {
             resize: none;
         }
-        
+
         .login-container, .new_user-container {
             margin: auto;
             width: 300px;
@@ -63,7 +71,7 @@
         .new_user-form input[type="text"],
         .new_user-form input[type="password"],
         .new_user-form input[type="email"],
-        .new_user-form input[type="submit"] 
+        .new_user-form input[type="submit"]
         {
             width: 100%;
             padding: 10px;
@@ -77,199 +85,291 @@
             color: #fff;
             cursor: pointer;
         }
-        
+
     </style>
-    
+
+    <title>Matching Service</title>
+    <style>
+
+        .modal-body {
+        max-height: 200px; /* Adjust as needed */
+
+    }
+
+    #timer {
+        display: none; /* Initially hide the timer */
+        text-align: center;
+    }
+    #clock {
+        font-size: 48px;
+        color: red;
+    }
+    #feedback {
+        font-size: 24px;
+        color: #333;
+        animation: pulse 1s infinite; /* Add animation for feedback */
+        text-align: center;
+    }
+    }
+    @keyframes pulse {
+        0% {
+            opacity: 0.5;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.5;
+        }
+    }
+    </style>
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">TIC3001</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">TIC3001</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav me-auto mb-2 mb-lg-0" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="userLogin-tab" data-bs-toggle="tab" data-bs-target="#userLogin-Pane"
-                            type="button" role="tab" aria-controls="userLogin-Pane" aria-selected="true">Login</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="newUser-tab" data-bs-toggle="tab" data-bs-target="#newUser-Pane"
-                            type="button" role="tab" aria-controls="newUser-Pane" aria-selected="true">Create New User</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link disabled" id="my-tab" data-bs-toggle="tab" data-bs-target="#my-Pane"
-                            type="button" role="tab" aria-controls="my-Pane" aria-selected="true">My Profile</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link disabled" id="listView-tab" data-bs-toggle="tab" data-bs-target="#listView"
-                            type="button" role="tab" aria-controls="listView" aria-selected="true">Questions</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link disabled" id="detailView-tab" data-bs-toggle="tab" data-bs-target="#detailView"
-                            type="button" role="tab" aria-controls="detailView" aria-selected="true" onclick="handleClear()">Add Question
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav me-auto mb-2 mb-lg-0" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="userLogin-tab" data-bs-toggle="tab" data-bs-target="#userLogin-Pane"
+                       type="button" role="tab" aria-controls="userLogin-Pane" aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="newUser-tab" data-bs-toggle="tab" data-bs-target="#newUser-Pane"
+                       type="button" role="tab" aria-controls="newUser-Pane" aria-selected="true">Create New User</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link disabled" id="my-tab" data-bs-toggle="tab" data-bs-target="#my-Pane"
+                       type="button" role="tab" aria-controls="my-Pane" aria-selected="true">My Profile</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link disabled" id="listView-tab" data-bs-toggle="tab" data-bs-target="#listView"
+                       type="button" role="tab" aria-controls="listView" aria-selected="true">Questions</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link disabled" id="detailView-tab" data-bs-toggle="tab" data-bs-target="#detailView"
+                       type="button" role="tab" aria-controls="detailView" aria-selected="true" onclick="handleClear()">Add Question
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link disabled" id="matching-tab" data-bs-toggle="modal" data-bs-target="#matchingModal"
+                       type="button" role="tab" aria-controls="matchingModal" aria-selected="true">Start Matching
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
-    
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active m-5" id="userLogin-Pane" role="tabpanel" aria-labelledby="userLogin-tab">
-            <div id="login-container" class="login-container">
-                <h2>Login</h2>
-                <form id="login-form" class="login-form" action="#" method="post">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-                    <input type="submit" value="Login">
-                </form>
-            </div>
-        </div>
-        <div class="tab-pane fade m-5" id="newUser-Pane" role="tabpanel" aria-labelledby="newUser-tab">
-            <div id="new_user-container" class="new_user-container">
-                <h2>Create New User</h2>
-                <form id="new_user-form" class="new_user-form" action="#" method="post">
-                    <input type="text" id="new_username" name="new_username" placeholder="Username" required>
-                    <input type="text" id="new_email" name="new_email" placeholder="Email" required>
-                    <input type="password" id="new_password" name="new_password" placeholder="Password" required>
-                    <input type="submit" value="Create New User">
-                </form>
-            </div>
-        </div>
+    </div>
+</nav>
 
-        <div class="tab-pane fade m-5" id="my-Pane" role="tabpanel" aria-labelledby="my-tab">
-            <!-- <h2>WORK IN PROGRESS</h2> -->
-            <div>
-                <button id="logout" class="btn btn-primary logout">Logout</button>
+
+<!-- Matching Modal -->
+<div class="modal fade" id="matchingModal"  aria-labelledby="matchingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="matchingModalLabel">Select Matching Particulars</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="user-profile-form" class="user-profile-form" >
-                <p id="user-Profile"></p>
-                <div class="mb-3">
-                    <label for="userName" class="form-label">User Name: </label>
-                    <input type="text" class="form-control" id="userName" />
-                </div>
-                <div class="mb-3">
-                    <label for="createAt" class="form-label">Created At: </label>
-                    <textarea type="text" class="form-control" id="createAt"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="myMatch" class="form-label">My Questions & Matches: {to be work on}</label>
-                    <!-- <input type="text" class="form-control" id="myMatch" /> -->
-                </div>
-                <button id='deleteAccount' type="Delete" class="btn btn-danger">Delete account</button>
+            <div class="modal-body">
+                <form id="matchingForm">
+                    <div class="mb-3">
+                        <label for="selectComplexity" class="form-label">Select Complexity</label>
+                        <select id="selectDifficulty" class="form-select" aria-label="Select Complexity" style="width: 400px;">
+                            <option value="Easy" selected>Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="selectTopic" class="form-label">Select Topic</label>
+                        <select id="selectTopic" class="form-select" aria-label="Select Topic" style="width: 400px;">
+                            <option value="Strings" selected>Strings</option>
+                            <option value="Algorithms" selected>Algorithms</option>
+                            <option value="Data Structures" selected>Data Structures</option>
+                            <option value="Bit Manipulation" selected>Bit Manipulation</option>
+                            <option value="Brainteaser" selected>Brainteaser</option>
+                            <option value="Databases" selected>Databases</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="switchToLogin()" class="btn btn-secondary">Back</button>
+                <button id="start-Matching" class="btn btn-primary" >Start Matching</button>
+            </div>
+            <!-- Timer -->
+            <div id="timer">
+                <p id="clock">00:30</p>
+            </div>
+
+            <!-- Feedback -->
+            <div id="feedback" style="display: none;">Please wait while we find a match...</div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active m-5" id="userLogin-Pane" role="tabpanel" aria-labelledby="userLogin-tab">
+        <div id="login-container" class="login-container">
+            <h2>Login</h2>
+            <form id="login-form" class="login-form" action="#" method="post">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
             </form>
         </div>
-
-        <div class="tab-pane fade m-5" id="listView" role="tabpanel" aria-labelledby="listView-tab">
-            <div class="row">
-                <div class="col">               
-                </div>
-                <div class="col">
-                    <label for="fileUpload" class="form-label">Upload JSON File</label>
-                    <input type="file" class="form-control" id="fileUpload" accept=".json">
-                    <button type="button" onclick="handleFileUpload()" class="btn btn-primary">Upload File</button>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col" onclick="sortQuestionsByProperty('questionID')">
-                                Question Id
-                                <i class="fa fa-sort ml-3"></i>
-                            </th>
-                            <th scope="col" onclick="sortQuestionsByProperty('questionTitle')">
-                                Question Title
-                                <i class="fa fa-sort ml-3"></i>
-                            </th>
-                            <th scope="col" onclick="sortQuestionsByProperty('questionDesc')">
-                                Question Description
-                                <i class="fa fa-sort ml-3"></i>
-                            </th>
-                            <th scope="col" onclick="sortQuestionsByProperty('questionCat')">
-                                Question Category
-                                <i class="fa fa-sort ml-3"></i>
-                            </th>
-                            <th scope="col" onclick="sortQuestionsByProperty('questionComplexity')">
-                                Question Complexity
-                                <i class="fa fa-sort ml-3"></i>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <!-- Table body will be dynamically generated here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="tab-pane fade m-5" id="detailView" role="tabpanel" aria-labelledby="detail-tab">
-            <div class="row">
-                <div class="col">
-                    <button type="button" onclick="switchToQuestionsList()" class="btn btn-secondary">Back</button>
-                </div>
-                <div class="col">
-                    <button id="btnDelete" type="button" onclick="handleDelete(event)" class="btn btn-danger" style="display: none;">Delete</button>
-                </div>
-            </div>
-            
-            <form>
-                <p id="my-form-status"></p>
-                <div id="idContainer" class="mb-3" style="display: none;">
-                    <label for="inputID" name="id" class="form-label">Question Id</label>
-                    <input type="text" class="form-control" id="inputID" disabled aria-describedby="questionId" />
-                </div>
-                <div class="mb-3">
-                    <label for="inputTitle" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="inputTitle" />
-                </div>
-                <div class="mb-3">
-                    <label for="inputDesc" class="form-label">Description</label>
-                    <textarea class="form-control" rows="5" id="inputDesc"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="selectCategory" class="form-label">Select Category</label>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <ul class="list-group" id="leftCategory">
-                                    <!-- Category choices will be dynamically generated here -->
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <ul class="list-group" id="rightCategory">
-                                    <!-- Selected categories will be dynamically generated here -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="selectComplexity" class="form-label">Select Complexity</label>
-                    <select id="selectComplexity" class="form-select" aria-label="Select Complexity">
-                        <option value="Easy" selected>Easy</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Hard">Hard</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="inputLink" class="form-label">Link</label>
-                    <input type="text" class="form-control" id="inputLink" />
-                </div>
-                <button type="button" onclick="handleSubmit(event)" class="btn btn-primary">Submit</button>
-                <button type="reset" onclick="handleClear()" class="btn">Reset</button>
+    </div>
+    <div class="tab-pane fade m-5" id="newUser-Pane" role="tabpanel" aria-labelledby="newUser-tab">
+        <div id="new_user-container" class="new_user-container">
+            <h2>Create New User</h2>
+            <form id="new_user-form" class="new_user-form" action="#" method="post">
+                <input type="text" id="new_username" name="new_username" placeholder="Username" required>
+                <input type="text" id="new_email" name="new_email" placeholder="Email" required>
+                <input type="password" id="new_password" name="new_password" placeholder="Password" required>
+                <input type="submit" value="Create New User">
             </form>
         </div>
     </div>
 
-    <script src="https://use.fontawesome.com/c0bffde2b7.js"></script>
-    <script src="tabsMgt.js"></script>
-    <script src="login.js"></script>
-    <script src="question.js"></script>
+    <div class="tab-pane fade m-5" id="my-Pane" role="tabpanel" aria-labelledby="my-tab">
+        <!-- <h2>WORK IN PROGRESS</h2> -->
+        <div>
+            <button id="logout" class="btn btn-primary logout">Logout</button>
+        </div>
+        <form id="user-profile-form" class="user-profile-form" >
+            <p id="user-Profile"></p>
+            <div class="mb-3">
+                <label for="userName" class="form-label">User Name: </label>
+                <input type="text" class="form-control" id="userName" />
+            </div>
+            <div class="mb-3">
+                <label for="createAt" class="form-label">Created At: </label>
+                <textarea type="text" class="form-control" id="createAt"></textarea>
+            </div>
+            <button id='deleteAccount' type="Delete" class="btn btn-danger">Delete account</button>
+        </form>
+    </div>
+
+    <div class="tab-pane fade m-5" id="listView" role="tabpanel" aria-labelledby="listView-tab">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <label for="fileUpload" class="form-label">Upload JSON File</label>
+                <input type="file" class="form-control" id="fileUpload" accept=".json">
+                <button type="button" onclick="handleFileUpload()" class="btn btn-primary">Upload File</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col" onclick="sortQuestionsByProperty('questionID')">
+                        Question Id
+                        <i class="fa fa-sort ml-3"></i>
+                    </th>
+                    <th scope="col" onclick="sortQuestionsByProperty('questionTitle')">
+                        Question Title
+                        <i class="fa fa-sort ml-3"></i>
+                    </th>
+                    <th scope="col" onclick="sortQuestionsByProperty('questionDesc')">
+                        Question Description
+                        <i class="fa fa-sort ml-3"></i>
+                    </th>
+                    <th scope="col" onclick="sortQuestionsByProperty('questionCat')">
+                        Question Category
+                        <i class="fa fa-sort ml-3"></i>
+                    </th>
+                    <th scope="col" onclick="sortQuestionsByProperty('questionComplexity')">
+                        Question Complexity
+                        <i class="fa fa-sort ml-3"></i>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                <!-- Table body will be dynamically generated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade m-5" id="detailView" role="tabpanel" aria-labelledby="detail-tab">
+        <div class="row">
+            <div class="col">
+                <button type="button" onclick="switchToQuestionsList()" class="btn btn-secondary">Back</button>
+            </div>
+            <div class="col">
+                <button id="btnDelete" type="button" onclick="handleDelete(event)" class="btn btn-danger" style="display: none;">Delete</button>
+            </div>
+        </div>
+
+        <form>
+            <p id="my-form-status"></p>
+            <div id="idContainer" class="mb-3" style="display: none;">
+                <label for="inputID" name="id" class="form-label">Question Id</label>
+                <input type="text" class="form-control" id="inputID" disabled aria-describedby="questionId" />
+            </div>
+            <div class="mb-3">
+                <label for="inputTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="inputTitle" />
+            </div>
+            <div class="mb-3">
+                <label for="inputDesc" class="form-label">Description</label>
+                <textarea class="form-control" rows="5" id="inputDesc"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="selectCategory" class="form-label">Select Category</label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group" id="leftCategory">
+                                <!-- Category choices will be dynamically generated here -->
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group" id="rightCategory">
+                                <!-- Selected categories will be dynamically generated here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="selectComplexity" class="form-label">Select Complexity</label>
+                <select id="selectComplexity" class="form-select" aria-label="Select Complexity">
+                    <option value="Easy" selected>Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="inputLink" class="form-label">Link</label>
+                <input type="text" class="form-control" id="inputLink" />
+            </div>
+            <button type="button" onclick="handleSubmit(event)" class="btn btn-primary">Submit</button>
+            <button type="reset" onclick="handleClear()" class="btn">Reset</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://use.fontawesome.com/c0bffde2b7.js"></script>
+<script src="tabsMgt.js"></script>
+<script src="login.js"></script>
+<script src="question.js"></script>
+<script src="matching.js"></script>
+
 
 </body>
 
