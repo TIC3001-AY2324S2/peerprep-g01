@@ -21,7 +21,7 @@
       //const message = `UserID: ${userId}, Difficulty: ${difficulty}, Topic: ${topic}`;
 
       // Send the message to the server
-      fetch(`http://localhost:3001/send/${encodeURIComponent(userId)}/${encodeURIComponent(difficulty)}/${encodeURIComponent(topic)}`)
+      fetch(`http://localhost:5000/send/${encodeURIComponent(userId)}/${encodeURIComponent(difficulty)}/${encodeURIComponent(topic)}`)
         .then(response => response.text())
         .then(data => alert(data));
     }

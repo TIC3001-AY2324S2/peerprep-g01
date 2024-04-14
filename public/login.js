@@ -1,5 +1,7 @@
 var accessToken = "";
 
+//window.getUserProfile = getUserProfile;
+
 document.getElementById('login-form').addEventListener('submit', userLogin);
 document.getElementById('new_user-form').addEventListener('submit', userCreate);
 document.getElementById('deleteAccount').addEventListener('click', deleteUserAccount);
@@ -35,7 +37,11 @@ async function userLogin(event) {
         console.error('Error logging in: ', error);
         alert('An error occurred while logging in. Please try again.');
     }
+
+    //return data;
 }
+
+//module.exports = { userLogin, data };
 
 async function userCreate(event) {
     event.preventDefault();
@@ -48,7 +54,7 @@ async function userCreate(event) {
         password: password
     }
     console.log (data);
-
+        
     try {
         const response = await fetch('http://localhost:3001/users', {
             method: 'POST',
@@ -71,7 +77,6 @@ async function userCreate(event) {
 }
 
 
-
 async function getUserProfile(email,accessToken){
 
     //const email = user.email; 
@@ -81,7 +86,7 @@ async function getUserProfile(email,accessToken){
     var data = {
         email: email
     }
-
+        
     try {
         const response = await fetch('http://localhost:3001/users/getUserByEmail', {
             method: 'POST',
@@ -106,8 +111,10 @@ async function getUserProfile(email,accessToken){
         console.error('Error fetching profile: ', error);
         // alert('An error occurred while loading profile. Please try again.');
     }
+   //return data;
 
 }
+
 
 async function deleteUserAccount(event){
     console.log('handleDeleteUser',event);
