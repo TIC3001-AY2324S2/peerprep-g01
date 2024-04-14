@@ -43,7 +43,7 @@ function startConsumer(userData1, userData2, userMatch, res) {
             channel.ack(message);
     
             if(userMatch){
-              res.json({ message: "Match Found!!", userData2 });
+              res.send("Match Found with user: "+ userData2.user+ "!!" );
             }
     
           } else {

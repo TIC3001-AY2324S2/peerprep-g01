@@ -37,15 +37,7 @@ const userData2 ={
   topic: ''
 };
 
-// Define the response structure
-const response = {
-  message: "", // Message indicating the result
-  userData: {   // Data related to the user
-    user: '',     // User information
-    difficulty: '', // Difficulty level
-    topic: ''       // Topic
-  }
-};
+
 
 
 // to check if user has found match
@@ -102,7 +94,7 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
 
   // Send a response back to the client to indicate the message was sent
   if(userMatch){
-    res.json({ message: "Match Found!!", userData2 });
+    res.send("Match Found with user: "+ userData2.user+ "!!" );
   }
 
   else{

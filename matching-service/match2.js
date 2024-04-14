@@ -110,7 +110,7 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
 
   // Send a response back to the client to indicate the message was sent
   if(userMatch){
-    res.json({ message: "Match Found!!", userData2 });
+    res.send("Match Found with user: "+ userData2.user+ "!!" );
   } 
   else{
 
@@ -221,7 +221,7 @@ function startConsumer(res) {
         channel.ack(message);
 
         if(userMatch){
-          res.json({ message: "Match Found!!", userData2 });
+          res.send("Match Found with user: "+ userData2.user+ "!!" );
         }
 
       } else {

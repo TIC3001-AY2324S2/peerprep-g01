@@ -50,7 +50,7 @@ function startMatching() {
         document.getElementById("timer").style.display = "block";
 
         // Set initial time to 25 seconds
-        let secondsLeft = 20;
+        let secondsLeft = 25;
         updateClock(secondsLeft);
 
         // Update the countdown every second
