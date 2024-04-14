@@ -16,11 +16,3 @@ services:
     ports:
       - "3001:3001"
     container_name: user-service
-
-  matching-service:
-    build:
-      context: ./matching-service
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    container_name: matching-service
