@@ -91,10 +91,25 @@
     <title>Matching Service</title>
     <style>
 
-        .modal-body {
-        max-height: 200px; /* Adjust as needed */
+    .modal-body {
+        max-height: 175px; /* Adjust as needed */
 
     }
+
+    .response {
+    padding: 10px;
+    background-color: #0dc8d2c8;
+    border: 1px solid #110101;
+    
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-style: normal;
+    font-size: 20px;
+    text-align: center
+    ;
+    
+    }
+
 
     #timer {
         display: none; /* Initially hide the timer */
@@ -344,7 +359,8 @@
                     </form>
                 </div>
                 <div class="modal-body">
-                    <button type="button" onclick="switchToLogin()" class="btn btn-secondary">Back</button>
+                    
+                    <button id="backButton" class="btn btn-secondary">Back</button>
                     <button id="start-Matching" class="btn btn-primary" >Start Matching</button>
                 </div>
                 <!-- Timer -->
@@ -354,7 +370,14 @@
     
                 <!-- Feedback -->
                 <div id="feedback" style="display: none;">Please wait while we find a match...</div>
-    
+
+                <!-- Showing the response when match is found -->
+                <div id="responseContent" class="response">Match Information:
+                    <p id="modalMessage"></p>
+                    <p id="modalUser">User:</p>
+                    <p id="modalDifficulty">Difficulty:</p>
+                    <p id="modalTopic">Topic:</p>
+                </div>    
             </div>
         </div>
     </div>
@@ -365,9 +388,9 @@
 
 <script src="https://use.fontawesome.com/c0bffde2b7.js"></script>
 <script src="tabsMgt.js"></script>
-<script src="login.js"></script>
+<script src="login.js" ></script>
 <script src="question.js"></script>
-<script src="matching.js"></script>
+<script src="matching.js" ></script>
 
 
 </body>

@@ -28,7 +28,7 @@ const cors = require("cors");
 app.options(
   "*",
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:5000",
     optionsSuccessStatus: 200,
   })
 );
@@ -99,7 +99,7 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
   // Assert a queue exists (or create it if it doesn't) named "message_queue"
   await channel.assertQueue("message_queue");
 
-  //const correlationId = uuid.v4();
+
 
   // Send the message to the queue named "message_queue". Messages are sent as a buffer
   channel.sendToQueue("message_queue", Buffer.from(message));
@@ -122,8 +122,8 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
 );
 
 // Start the server on port 3001
-app.listen(3001, () => {
-  console.log("Producer running on port 3001");
+app.listen(5000, () => {
+  console.log("Producer running on port 5000");
 });
 
 
@@ -221,7 +221,7 @@ function startConsumer(res) {
         channel.ack(message);
 
         if(userMatch){
-          res.json({ message: "Match Found-2!!", userData2 });
+          res.json({ message: "Match Found!!", userData2 });
         }
 
       } else {
