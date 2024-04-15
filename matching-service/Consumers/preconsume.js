@@ -10,12 +10,12 @@ function startCheck(userData2) {
       
     
       // Assert a queue exists (or create it if it doesn't) named "message_queue"
-      await channel.assertQueue("message_queue");
+      await channel.assertQueue("message_queue2", { autoDelete: true });
     
       //let consumerTag;
     
       // Start consuming messages from the queue "message_queue"
-      const consumer = await channel.consume("message_queue", (message) => {
+      const consumer = await channel.consume("message_queue2", (message) => {
        
         try {
           // Extract the message content as a string
