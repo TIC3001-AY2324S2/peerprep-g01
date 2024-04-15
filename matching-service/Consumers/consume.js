@@ -45,10 +45,6 @@ function startConsumer(userData1, userData2, userMatch, res) {
             if(userMatch){
               //res.json({ message: "Match Found!!", userData2 });
               res.send("Match Found with user: "+ userData2.user+ "!!" );
-              if (consumer) {
-                channel.cancel(consumer.consumerTag);
-                console.log("Consumer stopped after user match.");
-              }
             }
     
           } else {
