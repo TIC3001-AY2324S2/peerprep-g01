@@ -4,7 +4,7 @@ const amqp = require("amqplib");
 function startCheck(userData2) {
     (async () => {
       // Create a connection to the local RabbitMQ server
-      const connection = await amqp.connect("amqp://localhost");
+      const connection = await amqp.connect(process.env.RABBITMQ_URL);
       const channel = await connection.createChannel();
     
       

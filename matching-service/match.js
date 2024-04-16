@@ -11,18 +11,13 @@ const app = express();
 const compare = require("./Utils/compare.js")
 const consume1 = require("./Consumers/preconsume.js")
 const consume2 = require("./Consumers/consume.js")
+const sendMsg = require("./Sender/sendmsg.js")
 
 // Import the cors middleware to enable CORS on the server
 const cors = require("cors");
 
 // Configure CORS to allow requests from a specific origin (http://localhost:3000) and to handle preflight requests
-app.options(
-  "*",
-  cors({
-    origin: "http://localhost:3000",
-    optionsSuccessStatus: 200,
-  })
-);
+
 app.use(cors());
 
 const userData1 = {
@@ -37,15 +32,7 @@ const userData2 ={
   topic: ''
 };
 
-// Define the response structure
-const response = {
-  message: "", // Message indicating the result
-  userData: {   // Data related to the user
-    user: '',     // User information
-    difficulty: '', // Difficulty level
-    topic: ''       // Topic
-  }
-};
+
 
 
 // to check if user has found match
@@ -84,30 +71,9 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
 
   // Construct the message using UserID, Difficulty, and Topic
   const message = JSON.stringify({ userId, difficulty, topic });
+  sendMsg.sendMessageToQueue(message);
+
   
-
-  const connection = await amqp.connect("amqp://localhost"); // Create a connection to the local RabbitMQ server
-  const channel = await connection.createChannel();
-
-  // Assert a queue exists (or create it if it doesn't) named "message_queue"
-  await channel.assertQueue("message_queue2", { autoDelete: true }); // Set autoDelete to true
-
-  // Send the message to the queue named "message_queue". Messages are sent as a buffer
-  channel.sendToQueue("message_queue2", Buffer.from(message));
-
-  // Close the channel and the connection to clean up resources
-  // Delay closing the connection for 25 seconds
-  setTimeout(async () => {
-    await channel.close();
-    await connection.close();
-    console.log("Connection closed after 25 sec.");
-  }, 25000); // 25 seconds
-
-
-  // Send a response back to the client to indicate the message was sent
-  /*if(userMatch){
-    res.json({ message: "Match Found!!", userData2 });
-  }*/
 
   if(userMatch){
 
@@ -124,7 +90,8 @@ app.get("/send/:userId/:difficulty/:topic", async (req, res) => {
 );
 
 // Start the server on port 3001
-app.listen(3000, () => {
-  console.log("Producer running on port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Producer running on port", PORT);
 });
 
