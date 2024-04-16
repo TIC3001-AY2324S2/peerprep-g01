@@ -16,3 +16,30 @@ services:
     ports:
       - "3001:3001"
     container_name: user-service
+
+  matching-service:
+    build:
+      context: ./matching-service
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: matching-service
+    environment:
+      RABBITMQ_URL: "amqp://rabbitmq:5672"  # RabbitMQ service name from the compose file
+    depends_on:
+      - rabbitmq
+    networks:
+      - peerprep_network
+    
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5673:5672
+        - 15673:15672
+    #networks:
+    #  - peerprep_network
+  
+#networks:
+ # peerprep_network:
+  #  external: true

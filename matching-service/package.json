@@ -1,9 +1,10 @@
 {
-  "name": "rabbitmqtutorial",
+  "name": "matching-service",
   "version": "1.0.0",
   "description": "",
-  "main": "consumer.js",
+  "main": "match.js",
   "scripts": {
+    "start": "node match.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

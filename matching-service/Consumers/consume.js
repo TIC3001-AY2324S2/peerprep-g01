@@ -5,7 +5,7 @@ const compare = require("../Utils/compare.js")
 function startConsumer(userData1, userData2, userMatch, res) {
     (async () => {
       // Create a connection to the local RabbitMQ server
-      const connection = await amqp.connect("amqp://localhost");
+      const connection = await amqp.connect(process.env.RABBITMQ_URL);
       const channel = await connection.createChannel();
     
       
