@@ -28,7 +28,7 @@ To run "peerprep-g01" application, please perform the following steps:
 
 Run on terminal:
 1. 'docker pull rabbitmq:3-management'
-2. 'docker run -d --name some-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management'
+2. 'docker run -d --name some-rabbit -p 5672:5672 -p 15672:15672 --network peerprep_network rabbitmq:3-management'
 
 You can now access the RabbitMQ management dashboard in your web browser at http://localhost:15672. 
 Use the default credentials: username "guest" and password "guest".
@@ -37,10 +37,8 @@ Bring the terminal to matching-service folder.
 Install the required dependencies:
 3. `npm install`.
 
-Run the apps:
-4. `npm user1.js`
-5. `npm user2.js`
+Run the app:
+4. `npm match.js`
 
-Open the index1.html and index2.html file in a web browser and click the "Send Message" button. 
 Observe the output in the consumer terminal, which should display the received message.
 

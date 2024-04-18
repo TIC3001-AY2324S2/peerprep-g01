@@ -66,6 +66,8 @@ function startConsumer(userData1, userData2, userMatch, res) {
       // Stop consuming messages after 25 seconds
       setTimeout(() => {
         if (consumer) {
+          if(userMatch == false){
+            res.send("No Match Found" );}
           channel.cancel(consumer.consumerTag);
           console.log("Consumer stopped after 25 seconds.");
         }
