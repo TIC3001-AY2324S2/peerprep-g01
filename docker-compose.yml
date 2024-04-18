@@ -25,21 +25,12 @@ services:
       - "3000:3000"
     container_name: matching-service
     environment:
-      RABBITMQ_URL: "amqp://rabbitmq:5672"  # RabbitMQ service name from the compose file
-    depends_on:
-      - rabbitmq
+      RABBITMQ_URL: amqp://guest:guest@some-rabbit:5672
     networks:
       - peerprep_network
     
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
-    ports:
-        - 5673:5672
-        - 15673:15672
-    #networks:
-    #  - peerprep_network
   
-#networks:
- # peerprep_network:
-  #  external: true
+  
+networks:
+  peerprep_network:
+    external: true
